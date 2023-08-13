@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import { v4 as uuid } from "uuid";
+import { ITask } from "@/interfaces/interfaces";
 
-const CreateTask = ({ tasks, setTasks }) => {
-    interface ITask {
-        id: string;
-        title: string;
-        status?: string;
-    }
-
+const CreateTask = ({
+    tasks,
+    setTasks,
+}: {
+    tasks: ITask[];
+    setTasks: Dispatch<SetStateAction<ITask[]>>;
+}) => {
     const [task, setTask] = useState({
         id: "",
         title: "",
@@ -19,13 +20,20 @@ const CreateTask = ({ tasks, setTasks }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        setTasks((prev) => {
-            const list = [...prev, task];
+        if (task.title.trim().length < 3 && task.title.trim().length > 140) {
+            return;
+        }
+
+        setTasks((prev: ITask[]) => {
+            console.log("prev state", prev);
+            const list: ITask[] = [...prev, task];
 
             localStorage.setItem("tasks", JSON.stringify(list));
 
             return list;
         });
+
+        setTask({ id: "", title: "", status: "todo" });
     };
 
     return (
