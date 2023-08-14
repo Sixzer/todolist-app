@@ -37,7 +37,7 @@ const CreateTask = ({
     };
 
     return (
-        <form className="bg-pink-500" onSubmit={handleSubmit}>
+        <form className="mb-4" onSubmit={handleSubmit}>
             <p>Create Task Component</p>
             <input
                 className="px-1"
@@ -47,7 +47,7 @@ const CreateTask = ({
                     setTask({ ...task, id: uuid(), title: e.target.value })
                 }
             />
-            <button type="submit">Create</button>
+            <button className="bg-pink-500">Create</button>
         </form>
     );
 };

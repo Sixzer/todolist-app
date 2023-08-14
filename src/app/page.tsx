@@ -2,7 +2,7 @@
 import "./globals.css";
 import CreateTask from "@/components/CreateTask";
 import { useEffect, useState } from "react";
-import TasksList from "@/components/TasksList";
+import TaskList from "@/components/TaskList";
 import { ITask } from "@/interfaces/interfaces";
 import { parse } from "path";
 
@@ -21,10 +21,10 @@ export default function Home() {
     }, []);
 
     return (
-        <main className="bg-green-500 flex flex-col items-center">
-            <p>To Do List</p>
+        <main className=" flex flex-col items-center">
+            <h1>To Do List</h1>
             <CreateTask tasks={tasks} setTasks={setTasks} />
-            <TasksList tasks={tasks} setTasks={setTasks} />
+            <TaskList tasks={tasks} setTasks={setTasks} />
         </main>
     );
 }
