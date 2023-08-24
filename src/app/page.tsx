@@ -4,12 +4,9 @@ import CreateTask from "@/components/CreateTask";
 import { useEffect, useState } from "react";
 import TaskList from "@/components/TaskList";
 import { ITask } from "@/interfaces/interfaces";
-import { parse } from "path";
 
 export default function Home() {
     const [tasks, setTasks] = useState<ITask[]>([]);
-
-    console.log("tasks", tasks);
 
     useEffect(() => {
         //@ts-ignore

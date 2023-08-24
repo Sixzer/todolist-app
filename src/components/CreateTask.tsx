@@ -9,18 +9,16 @@ const CreateTask = ({
     tasks: ITask[];
     setTasks: Dispatch<SetStateAction<ITask[]>>;
 }) => {
-    const [task, setTask] = useState({
+    const [task, setTask] = useState<ITask>({
         id: "",
         title: "",
         status: "todo",
     });
 
-    console.log("task", task);
-
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (task.title.trim().length < 3 && task.title.trim().length > 140) {
+        if (task.title.trim().length < 3 || task.title.trim().length > 140) {
             return;
         }
 
@@ -40,14 +38,14 @@ const CreateTask = ({
         <form className="mb-4" onSubmit={handleSubmit}>
             <p>Create Task Component</p>
             <input
-                className="px-1"
+                className="px-1 rounded-full"
                 type="text"
                 value={task.title}
                 onChange={(e) =>
                     setTask({ ...task, id: uuid(), title: e.target.value })
                 }
             />
-            <button className="bg-pink-500">Create</button>
+            <button className="bg-pink-500 ">Create</button>
         </form>
     );
 };
