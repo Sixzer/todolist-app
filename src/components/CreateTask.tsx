@@ -12,7 +12,7 @@ const CreateTask = ({
     const [task, setTask] = useState<ITask>({
         id: "",
         title: "",
-        status: "todo",
+        status: "TODOS",
     });
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,21 +31,20 @@ const CreateTask = ({
             return list;
         });
 
-        setTask({ id: "", title: "", status: "todo" });
+        setTask({ id: "", title: "", status: "TODOS" });
     };
 
     return (
         <form className="mb-4" onSubmit={handleSubmit}>
-            <p>Create Task Component</p>
             <input
-                className="px-1 rounded-full"
+                className="px-1 rounded-md h-10 mr-5"
                 type="text"
                 value={task.title}
                 onChange={(e) =>
                     setTask({ ...task, id: uuid(), title: e.target.value })
                 }
             />
-            <button className="bg-pink-500 ">Create</button>
+            <button className="bg-pink-500 rounded-md h-10 w-20">Create</button>
         </form>
     );
 };

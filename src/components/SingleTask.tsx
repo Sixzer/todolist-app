@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { ITask } from "@/interfaces/interfaces";
+import { useDrag } from "react-dnd";
 
 const SingleTask = ({
     task,
@@ -10,9 +11,13 @@ const SingleTask = ({
     tasks: ITask[];
     setTasks: Dispatch<SetStateAction<ITask[]>>;
 }) => {
-    const deleteTask = (id: string) => {
-        console.log("delete", id, task.title);
+    const [{ isDragging }, drag] = useDrag(() => ({
+        type: "singleTask",
+        item: { id: task.id },
+        collect: (monitor: any) => ({ isDragging: !!monitor.isDragging() }),
+    }));
 
+    const deleteTask = (id: string) => {
         const filteredTasks = tasks.filter((task: ITask) => task.id !== id);
 
         localStorage.setItem("tasks", JSON.stringify(filteredTasks));
@@ -20,7 +25,12 @@ const SingleTask = ({
     };
 
     return (
-        <li className="relative p-4 mt-5 shadow-md rounded-md cursor-grab">
+        <li
+            ref={drag}
+            className={`relative p-4 mt-5 shadow-md rounded-md bg-white cursor-grab ${
+                isDragging ? "opacity-50" : ""
+            }`}
+        >
             <p className="pr-10 break-words">{task.title}</p>
             <button
                 className="absolute bottom-4 right-4"

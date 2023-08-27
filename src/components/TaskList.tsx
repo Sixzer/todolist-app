@@ -14,11 +14,11 @@ const TaskList = ({
     const [done, setDone] = useState<ITask[]>([]);
 
     useEffect(() => {
-        const filteredTodos = tasks.filter((task) => task.status === "todo");
+        const filteredTodos = tasks.filter((task) => task.status === "TODOS");
         const filteredWorking = tasks.filter(
-            (task) => task.status === "working"
+            (task) => task.status === "WORKING"
         );
-        const filteredDone = tasks.filter((task) => task.status === "done");
+        const filteredDone = tasks.filter((task) => task.status === "DONE");
 
         setTodos(filteredTodos);
         setWorking(filteredWorking);
@@ -26,9 +26,9 @@ const TaskList = ({
     }, [tasks]);
 
     enum Statuses {
-        Todos = "TODOS",
-        Working = "WORKING",
-        Done = "DONE",
+        TODOS = "TODOS",
+        WORKING = "WORKING",
+        DONE = "DONE",
     }
 
     return (
