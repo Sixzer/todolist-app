@@ -9,19 +9,20 @@ const TaskTimetracker = ({
     task: ITask;
     tasks: ITask[];
     setTasks: Dispatch<SetStateAction<ITask[]>>;
-}) => {
+}): JSX.Element => {
     const [timer, setTimer] = useState<number>(task.timer);
     const [isRunning, setIsRunning] = useState<boolean>(false);
 
     useEffect(() => {
-        // let interval: NodeJS.Timer;
-        let interval: any;
+        let interval: NodeJS.Timer;
+        // let interval: any;
 
         if (isRunning) {
             interval = setInterval(() => {
                 setTimer((prevTimer) => prevTimer + 1);
             }, 1000);
         } else {
+            //@ts-ignore
             clearInterval(interval);
             changeTimer(task.id);
         }
@@ -29,7 +30,7 @@ const TaskTimetracker = ({
         return () => clearInterval(interval);
     }, [isRunning]);
 
-    const changeTimer = (id: string) => {
+    const changeTimer = (id: string): void => {
         setTasks((prev) => {
             const modifiedTasks = prev.map((task) => {
                 if (task.id === id) {
@@ -44,7 +45,7 @@ const TaskTimetracker = ({
         });
     };
 
-    const toggleTimer = () => {
+    const toggleTimer = (): void => {
         setIsRunning((prevIsRunning) => !prevIsRunning);
     };
 

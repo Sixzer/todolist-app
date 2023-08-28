@@ -1,4 +1,12 @@
-const TaskHeader = ({ text, bgColor, taskCount }: any) => {
+const TaskHeader = ({
+    text,
+    bgColor,
+    taskCount,
+}: {
+    text: string;
+    bgColor: string;
+    taskCount: number;
+}): JSX.Element => {
     return (
         <>
             <h2

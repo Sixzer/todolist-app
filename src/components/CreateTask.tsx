@@ -8,7 +8,7 @@ const CreateTask = ({
 }: {
     tasks: ITask[];
     setTasks: Dispatch<SetStateAction<ITask[]>>;
-}) => {
+}): JSX.Element => {
     const [task, setTask] = useState<ITask>({
         id: "",
         title: "",
@@ -16,7 +16,7 @@ const CreateTask = ({
         timer: 0,
     });
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
         if (task.title.trim().length < 3 || task.title.trim().length > 140) {

@@ -18,9 +18,9 @@ const SectionList = ({
     todos: ITask[];
     working: ITask[];
     done: ITask[];
-}) => {
+}): JSX.Element => {
     let bgColor: string = "bg-red-500";
-    let taskList = todos;
+    let taskList: ITask[] = todos;
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "singleTask",
@@ -30,7 +30,7 @@ const SectionList = ({
         }),
     }));
 
-    const changeStatus = (id: string) => {
+    const changeStatus = (id: string): void => {
         setTasks((prev: ITask[]) => {
             const modifiedTasks = prev.map((task) => {
                 if (task.id === id) {

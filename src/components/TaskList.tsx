@@ -8,10 +8,16 @@ const TaskList = ({
 }: {
     tasks: ITask[];
     setTasks: Dispatch<SetStateAction<ITask[]>>;
-}) => {
+}): JSX.Element => {
     const [todos, setTodos] = useState<ITask[]>([]);
     const [working, setWorking] = useState<ITask[]>([]);
     const [done, setDone] = useState<ITask[]>([]);
+
+    enum Statuses {
+        TODOS = "TODOS",
+        WORKING = "WORKING",
+        DONE = "DONE",
+    }
 
     useEffect(() => {
         const filteredTodos = tasks.filter((task) => task.status === "TODOS");
@@ -24,12 +30,6 @@ const TaskList = ({
         setWorking(filteredWorking);
         setDone(filteredDone);
     }, [tasks]);
-
-    enum Statuses {
-        TODOS = "TODOS",
-        WORKING = "WORKING",
-        DONE = "DONE",
-    }
 
     return (
         <section className="flex gap-10">

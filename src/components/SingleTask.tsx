@@ -11,14 +11,14 @@ const SingleTask = ({
     task: ITask;
     tasks: ITask[];
     setTasks: Dispatch<SetStateAction<ITask[]>>;
-}) => {
+}): JSX.Element => {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "singleTask",
         item: { id: task.id },
         collect: (monitor: any) => ({ isDragging: !!monitor.isDragging() }),
     }));
 
-    const deleteTask = (id: string) => {
+    const deleteTask = (id: string): void => {
         const filteredTasks = tasks.filter((task: ITask) => task.id !== id);
 
         localStorage.setItem("tasks", JSON.stringify(filteredTasks));
