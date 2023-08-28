@@ -19,19 +19,19 @@ const SectionList = ({
     working: ITask[];
     done: ITask[];
 }) => {
-    let bgColor: string = "bg-red-400";
+    let bgColor: string = "bg-red-500";
     let taskList = todos;
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "singleTask",
-        drop: (item: ITask) => addItemToSection(item.id),
+        drop: (item: ITask) => changeStatus(item.id),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
         }),
     }));
 
-    const addItemToSection = (id: string) => {
-        setTasks((prev) => {
+    const changeStatus = (id: string) => {
+        setTasks((prev: ITask[]) => {
             const modifiedTasks = prev.map((task) => {
                 if (task.id === id) {
                     return { ...task, status: status };
@@ -47,12 +47,12 @@ const SectionList = ({
 
     switch (status) {
         case "WORKING": {
-            bgColor = "bg-yellow-400";
+            bgColor = "bg-yellow-500";
             taskList = working;
             break;
         }
         case "DONE": {
-            bgColor = "bg-green-400";
+            bgColor = "bg-green-500";
             taskList = done;
             break;
         }
@@ -63,7 +63,9 @@ const SectionList = ({
     return (
         <section
             ref={drop}
-            className={`w-64 rounded-md p-2 ${isOver ? "bg-indigo-200" : ""}`}
+            className={`w-64 rounded-md p-2  ${
+                isOver ? "bg-white bg-opacity-50" : ""
+            }`}
         >
             <TaskHeader
                 text={status}

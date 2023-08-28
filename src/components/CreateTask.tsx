@@ -13,6 +13,7 @@ const CreateTask = ({
         id: "",
         title: "",
         status: "TODOS",
+        timer: 0,
     });
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +24,6 @@ const CreateTask = ({
         }
 
         setTasks((prev: ITask[]) => {
-            console.log("prev state", prev);
             const list: ITask[] = [...prev, task];
 
             localStorage.setItem("tasks", JSON.stringify(list));
@@ -31,20 +31,23 @@ const CreateTask = ({
             return list;
         });
 
-        setTask({ id: "", title: "", status: "TODOS" });
+        setTask({ id: "", title: "", status: "TODOS", timer: 0 });
     };
 
     return (
-        <form className="mb-4" onSubmit={handleSubmit}>
+        <form className="" onSubmit={handleSubmit}>
             <input
-                className="px-1 rounded-md h-10 mr-5"
+                className="px-1 rounded-md mr-5 h-12 w-64"
                 type="text"
                 value={task.title}
+                placeholder="Enter task name"
                 onChange={(e) =>
                     setTask({ ...task, id: uuid(), title: e.target.value })
                 }
             />
-            <button className="bg-pink-500 rounded-md h-10 w-20">Create</button>
+            <button className="bg-cyan-500 rounded-md h-12 w-20 hover:opacity-75 text-white">
+                Create
+            </button>
         </form>
     );
 };
